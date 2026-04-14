@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Grade 10 Classmates</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f5f5f5;
+    padding: 20px;
+}
+
+.box {
+    background: white;
+    max-width: 550px;
+    margin: auto;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+button {
+    width: 49%;
+    padding: 10px;
+    border: none;
+    color: white;
+}
+
+.add { background: blue; }
+.show { background: green; }
+
+.item {
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2 style="text-align:center;">Grade 10 Classmates System</h2>
+<p style="text-align:center;">Add and view classmates</p>
+
+<div class="box">
+    <input id="name" placeholder="Name">
+    <input id="section" placeholder="Section">
+    <input id="subject" placeholder="Favorite subject">
+
+    <button class="add" onclick="add()">Add</button>
+    <button class="show" onclick="show()">Show</button>
+</div>
+
+<div class="box">
+    <h3>Classmate List</h3>
+    <div id="list"></div>
+</div>
+
+<script>
+class Classmate {
+    constructor(name, section, subject) {
+        this.name = name;
+        this.section = section;
+        this.subject = subject;
+    }
+
+    introduce() {
+        return `Hi I'm ${this.name} from ${this.section} My favorite subject is ${this.subject}`;
+    }
+}
+
+let classmates = [];
+
+function add() {
+    var name = document.getElementById("name").value;
+    var  section = document.getElementById("section").value;
+    var subject = document.getElementById("subject").value;
+
+    if (!name || !section || !subject) {
+        alert("Fill all fields");
+        return;
+    }
+
+    classmates.push(new Classmate(name, section, subject));
+
+    document.getElementById("name").value = "";
+    document.getElementById("section").value = "";
+    document.getElementById("subject").value = "";
+
+    show();
+}
+
+function show() {
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+
+    classmates.forEach(c => {
+        list.innerHTML += `<div class="item">${c.introduce()}</div>`;
+    });s
+}
+
+window.onload = show;
+</script>s
